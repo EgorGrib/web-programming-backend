@@ -1,0 +1,23 @@
+<nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index">
+            <img src="/img/logo.png" alt="" width="50">
+        </a>
+        <a class="navbar-brand menu-item" href="index"><span class="brand-name">Apple Market</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {{> menu_items }}
+            <a class="nav-link login-button" aria-current="page" href="#"><span class="device">username</span></a>
+            <div class="basket">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalBasket"><img src="/img/basket.svg" alt="" width="30"></a>
+            </div>
+            <div class="basket2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalBasket"><span class="device">Корзина</span></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{{> basket }}
