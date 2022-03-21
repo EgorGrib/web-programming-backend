@@ -113,8 +113,7 @@ footer a {
 }
 
 .active-item {
-    #color: #ea4848 !important;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 @media (max-width: 768px) {

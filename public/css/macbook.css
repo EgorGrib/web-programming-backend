@@ -37,8 +37,7 @@ a {
 }
 
 .active-item {
-    #color: #ea4848 !important;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .basket2 {
