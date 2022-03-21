@@ -3,69 +3,40 @@ import {Controller, Get, Render} from '@nestjs/common';
 @Controller()
 export class AppController {
 
-  @Get()
+  @Get(['/', '/index'])
   @Render('index')
-  root() {
-    return;
+  getIndexPage() {
+    return { isLoggedIn : Math.random() < 0.5 };
   }
-}
 
-@Controller('/index')
-export class IndexController {
-
-  @Get()
-  @Render('index')
-  root() {
-    return;
-  }
-}
-
-@Controller('/ipad')
-export class IpadController {
-
-  @Get()
+  @Get('/ipad')
   @Render('ipad')
-  ipad() {
-    return;
+  getIpadPage() {
+    return { isLoggedIn : Math.random() < 0.5 };
   }
-}
 
-@Controller('/iphone')
-export class IphoneController {
-
-  @Get()
+  @Get('/iphone')
   @Render('iphone')
-  iphone() {
-    return;
+  getIphonePage() {
+    return { isLoggedIn : Math.random() < 0.5 };
   }
-}
 
-@Controller('/macbook')
-export class MacbookController {
-
-  @Get()
+  @Get('/macbook')
   @Render('macbook')
-  macbook() {
-    return;
+  getMacbookPage() {
+    return { isLoggedIn : Math.random() < 0.5 };
   }
-}
 
-@Controller('/support')
-export class SupportController {
-
-  @Get()
+  @Get('/support')
   @Render('support')
-  support() {
-    return;
+  getSupportPage() {
+    return { isLoggedIn : Math.random() < 0.5 };
   }
-}
 
-@Controller('/watch')
-export class WatchController {
-
-  @Get()
+  @Get('/watch')
   @Render('watch')
-  watch() {
-    return;
+  getWatchPage() {
+    return { isLoggedIn : Math.random() < 0.5 };
   }
+
 }

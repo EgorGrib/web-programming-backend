@@ -9,7 +9,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {{> menu_items }}
+            {{#if isLoggedIn}}
+            <a class="nav-link login-button" aria-current="page" href="#"><span class="device">username</span></a>
+            {{else}}
             <a class="nav-link login-button" aria-current="page" href="#"><span class="device">Войти</span></a>
+            {{/if}}
             <div class="basket">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalBasket"><img src="/img/basket.svg" alt="" width="30"></a>
             </div>

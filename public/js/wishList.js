@@ -16,10 +16,8 @@ function addWish(item) {
             name: item,
             completed: false
         };
-
         wishes.push(wish);
         addToLocalStorage(wishes);
-
         wishInput.value = '';
     }
 }
@@ -49,7 +47,6 @@ function renderWishes(wishes) {
                 deleteWish(event.target.parentElement.getAttribute('data-key'));
             }
         );
-
         wishItemsList.appendChild(clone);
     });
 
@@ -62,7 +59,6 @@ function addToLocalStorage(wishes) {
 
 function getFromLocalStorage() {
     const reference = localStorage.getItem('wishes');
-
     if (reference) {
         wishes = JSON.parse(reference);
         renderWishes(wishes);
@@ -75,16 +71,13 @@ function toggle(id) {
             item.completed = !item.completed;
         }
     });
-
     addToLocalStorage(wishes);
 }
 
 function deleteWish(id) {
     wishes = wishes.filter(function(item) {
-
         return item.id != id;
     });
-
     addToLocalStorage(wishes);
 }
 

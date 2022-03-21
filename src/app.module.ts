@@ -1,25 +1,9 @@
 import { Module } from '@nestjs/common';
-import {
-    AppController,
-    IndexController,
-    IpadController,
-    IphoneController,
-    MacbookController,
-    SupportController,
-    WatchController,
-} from './app.controller';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [],
-  controllers: [
-    AppController,
-    IndexController,
-    IpadController,
-    IphoneController,
-    MacbookController,
-    SupportController,
-    WatchController,
-  ],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
