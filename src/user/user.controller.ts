@@ -1,7 +1,8 @@
-import {Controller, Delete, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post} from '@nestjs/common';
 import {UserService} from "./user.service";
 import {User} from "@prisma/client";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {UserDto} from "./dto/user.dto";
 
 
 @ApiTags('user')
@@ -10,38 +11,57 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @ApiOperation({
-        summary: 'Get a user by id and name'
+        summary: 'Get all users',
     })
-    @ApiResponse({
-        status: 501,
-        description: "The method is not implemented yet"
-    })
-    @Get(':user')
-    async getUser(@Param('user') id: number, name: string): Promise<User> {
-        return await this.userService.findUser(id, name);
+    @Get()
+    async getUsers(): Promise<User[]> {
+        return await this.userService.getUsers();
     }
 
     @ApiOperation({
-        summary: 'Create a user by email and name'
+        summary: 'Get a user by id'
     })
     @ApiResponse({
-        status: 501,
-        description: "The method is not implemented yet"
+        status: 400,
+        description: "Invalid id format"
+    })
+    @Get(':id')
+    async getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
+        return await this.userService.getUser(id);
+    }
+
+    @ApiOperation({
+        summary: 'Create a user by email, name and password'
+    })
+    @ApiResponse({
+        status: 201,
+        description: 'User created',
     })
     @Post('create')
-    async createUser(email: string, name: string): Promise<User> {
-        return await this.userService.createUser(email, name);
+    async createUser(@Body() CreateUserDto: UserDto): Promise<User> {
+        return await this.userService.createUser(CreateUserDto);
     }
 
     @ApiOperation({
-        summary: 'Delete a user by id and name'
+        summary: 'Update user by id'
+    })
+    @Post(':id/update')
+    async updateUser(
+        @Param('id', ParseIntPipe) id: number,
+        @Body() UserDto: UserDto,
+    ): Promise<User> {
+        return await this.userService.updateUser(id, UserDto);
+    }
+
+    @ApiOperation({
+        summary: 'Delete a user by id'
     })
     @ApiResponse({
-        status: 501,
-        description: "The method is not implemented yet"
+        status: 400,
+        description: 'Invalid id format'
     })
-    @Delete(':user/delete')
-    async deleteUser(@Param('user') id: number, name: string): Promise<User> {
-        return await this.userService.deleteUser(id, name);
+    @Delete(':id/delete')
+    async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<void> {
+        return await this.userService.deleteUser(id);
     }
 }

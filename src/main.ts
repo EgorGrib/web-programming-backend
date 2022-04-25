@@ -5,9 +5,11 @@ import { AppModule } from './app.module';
 import hbs = require('hbs');
 import {LoggingInterceptor} from "./logging.interceptor";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import {ValidationPipe} from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useGlobalPipes(new ValidationPipe({errorHttpStatusCode: 400,}));
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));

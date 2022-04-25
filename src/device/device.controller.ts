@@ -1,7 +1,8 @@
-import {Controller, Delete, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Render} from '@nestjs/common';
 import { Device } from '@prisma/client';
 import {DeviceService} from "./device.service";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {DeviceDto} from "./dto/device.dto";
 
 
 @ApiTags('device')
@@ -12,48 +13,52 @@ export class DeviceController {
     @ApiOperation({
         summary: 'Get all devices'
     })
-    @ApiResponse({
-        status: 501,
-        description: "The method is not implemented yet"
-    })
     @Get()
-    async listAll(): Promise<Device[]> {
-        return await this.deviceService.findAll();
+    async getDevices(): Promise<Device[]> {
+        return await this.deviceService.getDevices();
     }
 
     @ApiOperation({
         summary: 'Get a device by id'
     })
     @ApiResponse({
-        status: 501,
-        description: "The method is not implemented yet"
+        status: 400,
+        description: 'Invalid id format',
     })
     @Get(':id')
-    async read(@Param('Device') id: number): Promise<Device> {
-        return await this.deviceService.findById(id);
+    async getDevice(@Param('id', ParseIntPipe) id: number): Promise<Device> {
+        return await this.deviceService.getDevice(id);
     }
 
     @ApiOperation({
         summary: 'Create a device by title, description and price'
     })
     @ApiResponse({
-        status: 501,
-        description: "The method is not implemented yet"
+        status: 201,
+        description: 'Device created',
     })
     @Post()
-    async create(title: string, description: string, price: number): Promise<Device> {
-        return await this.deviceService.create(title, description, price);
+    async create(@Body() deviceDto: DeviceDto): Promise<Device> {
+        return await this.deviceService.createDevice(deviceDto);
     }
 
     @ApiOperation({
-        summary: 'Delete a device by id of device and id of user'
+        summary: 'Update device by id',
+    })
+    @Post(':id/update')
+    async updateDevice(@Param('id', ParseIntPipe) id: number, @Body() deviceDto: DeviceDto): Promise<Device> {
+        return await this.deviceService.updateDevice(id, deviceDto);
+    }
+
+    @ApiOperation({
+        summary: 'Delete a device by id'
     })
     @ApiResponse({
-        status: 501,
-        description: "The method is not implemented yet"
+        status: 400,
+        description: 'Invalid id format',
     })
     @Delete(':id')
-    async delete(@Param('Device') id: number, @Param('User') userId: number): Promise<Device> {
-        return await this.deviceService.delete(id, userId);
+    async delete(@Param('Device', ParseIntPipe) id: number): Promise<void> {
+        return await this.deviceService.deleteDevice(id);
     }
 }
