@@ -1,5 +1,7 @@
 import {Controller, Get, Render} from '@nestjs/common';
+import {PrismaClient} from "@prisma/client";
 
+const prisma = new PrismaClient();
 @Controller()
 export class AppController {
 
@@ -11,20 +13,44 @@ export class AppController {
 
   @Get('/ipad')
   @Render('ipad')
-  getIpadPage() {
-    return { isLoggedIn : Math.random() < 0.5 };
+  async getIpadPage() {
+    const device = await prisma.device.findUnique({where: {
+        id: 5
+    }});
+    return {
+      isLoggedIn : Math.random() < 0.5,
+      name: device.title,
+      description: device.description,
+      price: device.price
+    };
   }
 
   @Get('/iphone')
   @Render('iphone')
-  getIphonePage() {
-    return { isLoggedIn : Math.random() < 0.5 };
+  async getIphonePage() {
+    const device = await prisma.device.findUnique({where: {
+        id: 6
+    }});
+    return {
+      isLoggedIn : Math.random() < 0.5,
+      name: device.title,
+      description: device.description,
+      price: device.price
+    };
   }
 
   @Get('/macbook')
   @Render('macbook')
-  getMacbookPage() {
-    return { isLoggedIn : Math.random() < 0.5 };
+  async getMacbookPage() {
+    const device = await prisma.device.findUnique({where: {
+        id: 7
+      }});
+    return {
+      isLoggedIn : Math.random() < 0.5,
+      name: device.title,
+      description: device.description,
+      price: device.price
+    };
   }
 
   @Get('/support')
