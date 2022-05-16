@@ -6,10 +6,19 @@ import hbs = require('hbs');
 import {LoggingInterceptor} from "./logging.interceptor";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 import {ValidationPipe} from "@nestjs/common";
+import supertokens from "supertokens-node";
+import {SupertokensExceptionFilter} from "./auth/auth.filter";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useGlobalPipes(new ValidationPipe({errorHttpStatusCode: 400,}));
+
+  app.enableCors({
+    origin: ['https://applemarketru.herokuapp.com'],
+    allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
+    credentials: true,
+  });
+  app.useGlobalFilters(new SupertokensExceptionFilter());
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));

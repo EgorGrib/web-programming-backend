@@ -5,3 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/js/loadTime.js"></script>
 <script src="/js/navbar.js"></script>
+<script src="/js/auth.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-website/bundle/bundle.js"></script>
+<script>
+    supertokens.init({
+        apiDomain: "http://localhost:3000",
+        apiBasePath: "/auth"
+    });
+</script>

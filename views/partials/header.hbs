@@ -10,9 +10,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {{> menu_items }}
             {{#if isLoggedIn}}
-            <a class="nav-link login-button" aria-current="page" href="#"><span class="device">username</span></a>
+            <a class="nav-link login-button" type="submit" onClick="logout()" aria-current="page" href="#"><span class="device">Выйти</span></a>
             {{else}}
-            <a class="nav-link login-button" aria-current="page" href="#"><span class="device">Войти</span></a>
+            <div class="row">
+                <div class="col-4">
+                    <input id="email" class="form-control" name="email" placeholder="Email" required>
+                </div>
+                <div class="col-4">
+                    <input type="password" class="form-control" id="pass" name="password" placeholder="Password" required>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary" onClick="login()">Войти</button>
+                </div>
+            </div>
             {{/if}}
             <div class="basket">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalBasket"><img src="/img/basket.svg" alt="" width="30"></a>

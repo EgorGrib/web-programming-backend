@@ -8,7 +8,7 @@ export class AppController {
   @Get(['/', '/index'])
   @Render('index')
   getIndexPage() {
-    return { isLoggedIn : Math.random() < 0.5 };
+    return { };
   }
 
   @Get('/ipad')
@@ -18,7 +18,7 @@ export class AppController {
         id: 5
     }});
     return {
-      isLoggedIn : Math.random() < 0.5,
+      isLoggedIn: false,
       name: device.title,
       description: device.description,
       price: device.price
@@ -32,7 +32,7 @@ export class AppController {
         id: 6
     }});
     return {
-      isLoggedIn : Math.random() < 0.5,
+      isLoggedIn : false,
       name: device.title,
       description: device.description,
       price: device.price
@@ -46,7 +46,7 @@ export class AppController {
         id: 7
       }});
     return {
-      isLoggedIn : Math.random() < 0.5,
+      isLoggedIn : false,
       name: device.title,
       description: device.description,
       price: device.price
@@ -56,13 +56,13 @@ export class AppController {
   @Get('/support')
   @Render('support')
   getSupportPage() {
-    return { isLoggedIn : Math.random() < 0.5 };
+    return { isLoggedIn: false };
   }
 
   @Get('/watch')
   @Render('watch')
   getWatchPage() {
-    return { isLoggedIn : Math.random() < 0.5 };
+    return { isLoggedIn: false };
   }
 
 }

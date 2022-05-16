@@ -1,8 +1,11 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Render} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Render, UseGuards} from '@nestjs/common';
 import { Device } from '@prisma/client';
 import {DeviceService} from "./device.service";
-import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ApiBasicAuth, ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {DeviceDto} from "./dto/device.dto";
+import {AuthGuard} from "../auth/auth.guard";
+import {Session} from "../auth/session.decorator";
+import {SessionContainer} from "supertokens-node/lib/build/recipe/session/faunadb";
 
 
 @ApiTags('device')
@@ -13,8 +16,10 @@ export class DeviceController {
     @ApiOperation({
         summary: 'Get all devices'
     })
+    @UseGuards(AuthGuard)
+    @ApiBasicAuth()
     @Get()
-    async getDevices(): Promise<Device[]> {
+    async getDevices(@Session() session: SessionContainer): Promise<Device[]> {
         return await this.deviceService.getDevices();
     }
 
@@ -57,8 +62,12 @@ export class DeviceController {
         status: 400,
         description: 'Invalid id format',
     })
+    @UseGuards(AuthGuard)
+    @ApiBasicAuth()
     @Delete(':id')
-    async delete(@Param('Device', ParseIntPipe) id: number): Promise<void> {
+    async delete(@Param('id', ParseIntPipe) id: number, @Session() session: SessionContainer): Promise<void> {
+        const userId = session.getUserId();
+        console.log(userId);
         return await this.deviceService.deleteDevice(id);
     }
 }
