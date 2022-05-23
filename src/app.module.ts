@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DeviceModule } from './device/device.module';
 import { BasketModule } from './basket/basket.module';
 import { AuthModule } from './auth/auth.module';
+import { AppGateway } from './app.gateway';
 
 @Module({
   imports: [ConfigModule.forRoot(), AuthModule.forRoot({
@@ -19,6 +20,6 @@ import { AuthModule } from './auth/auth.module';
     }
   }), UserModule, DeviceModule, BasketModule],
   controllers: [AppController],
-  providers: [],
+  providers: [AppGateway],
 })
 export class AppModule {}
