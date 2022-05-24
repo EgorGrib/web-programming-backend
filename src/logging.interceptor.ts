@@ -8,7 +8,7 @@ export class LoggingInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
         const now = Date.now();
         let ms = randomInt(100, 500);
-        return next.handle().pipe(delay(ms)).pipe(
+        return next.handle().pipe(
                 tap(() => {
                     hbs.registerHelper('time', function () {
                         return Date.now() - now;
