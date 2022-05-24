@@ -1,54 +1,23 @@
-
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Посмотреть результат](https://applemarketru.herokuapp.com/)
 
+Объектом разработки является интернет-магазин на языке программирования TypeScript с использованием фреймворка Nest – для серверной части приложения, с использованием Bootstrap – для клиентской части приложения.
+
+- В качестве веб-сервера используется Express.
+
+- В качестве базы данных используется PostgreSQL.
+
+- В качестве хостинга используется облачный сервис Heroku.
 ## Database ERD
+<p align="center">
+    <img src="public/img/public.png" height="500">
+</p>
 
-![](public/img/public.png)
+- User – модель, описывающая пользователя, у которого есть имя, адрес электронной почты и пароль.
 
-## Installation
 
-```bash
-$ npm install
-```
+- Basket – корзина пользователя, в которой находится массив девайсов, общая стоимость корзины и id пользователя, владеющего данной корзиной.
 
-## Running the app
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Device – девайс, товар, информацию о котором может просматривать пользователь, а также добавить к себе в корзину. Девайс имеет имя, описание, цену и id корзины, в которой он находится.
